@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Compras
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row color="primary" justify-content-center>
+      <ion-col align-self-center size-md="10" size-lg="8" size-xs="12">
+        <div text-start>
+          <h3>Cajero: {{cashier}} </h3>
+        </div>
+        <div text-start>
+          <h3>Total: {{totalCost.precioTotal}}</h3>
+        </div>
+        <div text-center>
+          <h3>Libros</h3>
+        </div>
+        <div padding>
+          <ion-list>
+            <ion-item *ngFor="let item of books">
+              <div slot="start">
+                <ion-icon name="book"></ion-icon>
+              </div>
+              <ion-label>
+                <h2>{{item.name}}</h2>
+                <h3>{{item.icbn}}</h3>
+                <p>Autor : {{item.author_FK.names}}</p>
+              </ion-label>
+              <ion-icon name="add-circle-outline" slot="end" (click)="addToCart(books.indexOf(item))"></ion-icon>
+            </ion-item>
+          </ion-list>
+        </div>
+        <div padding text-center>
+          <h3>Factura</h3>
+        </div>
+        <div padding>
+          <form  #form="ngForm" (ngSubmit)="shop(form)">
+            <ion-item>
+              <ion-input id="name" name="name" type="text" placeholder="Nombre del cliente" [(ngModel)]="name" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input id="ruc" name="ruc" type="text" placeholder="RUC" [(ngModel)]="ruc" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input id="address" name="address" type="text" placeholder="Dirección" [(ngModel)]="address" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input id="phoneNumber" name="phoneNumber" type="text" placeholder="Número telefónico" [(ngModel)]="phoneNumber" required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input name="email" type="email" placeholder="Email" [(ngModel)]="email" required></ion-input>
+            </ion-item>
+            <div padding>
+              <ion-list>
+                <ion-item *ngFor="let item of cart">
+                  <div slot="start">
+                    {{item.cantidad}}
+                  </div>
+                  <ion-label>
+                    <h2>{{item.producto.name}}</h2>
+                    <h3>{{item.producto.icbn}}</h3>
+                    <p>Autor : {{item.producto.author_FK.names}}</p>
+                  </ion-label>
+                  <ion-icon name="remove-circle-outline" slot="end" (click)="removeFromCart(item.producto)"></ion-icon>
+                </ion-item>
+              </ion-list>
+            </div>
+            <div padding>
+              <ion-button  size="large" type="submit" [disabled]="form.invalid" expand="block">Comprar</ion-button>
+            </div>
+          </form>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+

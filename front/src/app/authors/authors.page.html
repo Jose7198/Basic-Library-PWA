@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Autores
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row color="primary" justify-content-center>
+      <ion-col align-self-center size-md="10" size-lg="8" size-xs="12">
+        <div padding>
+          <ion-searchbar showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
+        </div>
+        <div padding>
+          <ion-list>
+            <ion-item *ngFor="let item of authors | filtro: searchText : 'names'">
+              <div slot="start">
+                <ion-icon name="flag" *ngIf="item.ecuatorian"></ion-icon>
+                <ion-icon name="globe" *ngIf="!item.ecuatorian"></ion-icon>
+              </div>
+              <ion-label (click)="presentActionSheet(authors.indexOf(item))">
+                <h2>{{item.names}} {{item.lastNames}}</h2>
+                <h3>{{item.birthDate}}</h3>
+                <p>{{item.numberBooks}} libros</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </div>
+        <div padding>
+          <ion-button  size="large" expand="block" routerLink="/new-author">Agregar autor</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
+
+
