@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        Libros
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="10" size-lg="8" size-xs="12">
+          <div padding>
+            <ion-searchbar showCancelButton="focus" (ionChange)="search($event)"></ion-searchbar>
+          </div>
+          <div padding>
+            <ion-list>
+              <ion-item *ngFor="let item of books | filtro: searchText : 'name'">
+                <div slot="start">
+                  <ion-icon name="book"></ion-icon>
+                </div>
+                <ion-label (click)="presentActionSheet(books.indexOf(item))">
+                  <h2>{{item.name}}</h2>
+                  <h3>{{item.icbn}}</h3>
+                  <p>{{item.editorialName}}</p>
+                </ion-label>
+                <ion-label slot="end">
+                  <p>{{item.pageNumber}} páginas</p>
+                  <p>{{item.publicationDate}}</p>
+                  <p>Edición {{item.edition}}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </div>
+          <div padding>
+            <ion-button  size="large" expand="block" (click)="goToNewBook()">Agregar libro</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+  </ion-content>
+  
+  
+  

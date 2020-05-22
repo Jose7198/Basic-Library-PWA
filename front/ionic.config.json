@@ -1,0 +1,7 @@
+{
+  "name": "examen-front",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
